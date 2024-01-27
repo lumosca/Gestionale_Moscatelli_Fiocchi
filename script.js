@@ -13,7 +13,7 @@ function login() {
 
     if (user) {
         alert("Login riuscito!");
-        
+
         window.location.href = "menu.html";
     } else {
         alert("Credenziali non valide. Riprova.");
@@ -24,18 +24,18 @@ function register() {
     const newUsername = document.getElementById("newUsername").value;
     const newPassword = document.getElementById("newPassword").value;
 
-    
+
     if (users.some(u => u.username === newUsername)) {
         alert("Username già in uso. Scegline un altro.");
     } else {
-        
+
         users.push({ username: newUsername, password: newPassword });
         alert("Registrazione riuscita! Ora puoi effettuare il login.");
     }
 }
 
 function redirectToLogin() {
-    
+
     window.location.href = "login.html";
 }
 
