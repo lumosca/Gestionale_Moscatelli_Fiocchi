@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrazione</title>
+    <link rel="stylesheet" href="login_register.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Registrazione</h2>
+        <form id="registerForm">
+            <label for="newUsername">Nuovo Username:</label>
+            <input type="text" id="newUsername" name="newUsername" required>
+            <br>
+            <label for="newPassword">Nuova Password:</label>
+            <input type="password" id="newPassword" name="newPassword" required>
+            <br>
+            <label for="confirmPassword">Conferma Password:</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" required>
+            <br>
+            <div id="passwordMatchMessage"></div>
+            <button type="button" onclick="register()">Registrati</button>
+        </form>
+
+        <p>Hai già un account? <a href="login.html">Login</a></p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
