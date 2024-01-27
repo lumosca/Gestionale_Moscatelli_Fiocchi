@@ -1,7 +1,8 @@
-// Esempio di array per conservare gli utenti (da sostituire con un database)
 const users = [
     { username: "simone", password: "austeri" },
-    
+    { username: "francesco ", password: "magaletti" },
+    { username: "mattia", password: "fiocchi" },
+    { username: "nicola", password: "moscatelli" },
 ];
 
 function login() {
@@ -12,7 +13,7 @@ function login() {
 
     if (user) {
         alert("Login riuscito!");
-        
+
         window.location.href = "menu.html";
     } else {
         alert("Credenziali non valide. Riprova.");
@@ -23,18 +24,18 @@ function register() {
     const newUsername = document.getElementById("newUsername").value;
     const newPassword = document.getElementById("newPassword").value;
 
-    // Verifica se l'utente esiste già
+
     if (users.some(u => u.username === newUsername)) {
         alert("Username già in uso. Scegline un altro.");
     } else {
-        // Aggiungi il nuovo utente (in un'applicazione del mondo reale, dovresti gestire la memorizzazione dei dati)
+
         users.push({ username: newUsername, password: newPassword });
         alert("Registrazione riuscita! Ora puoi effettuare il login.");
     }
 }
 
 function redirectToLogin() {
-    // Redirect to the login page
+
     window.location.href = "login.html";
 }
 
