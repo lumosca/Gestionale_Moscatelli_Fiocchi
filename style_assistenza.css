@@ -1,0 +1,57 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #3498db;
+    color: #fff;
+    scroll-behavior: smooth; 
+}
+
+.container {
+    width: 80%;
+    max-width: 600px;
+}
+
+h2 {
+    color: #fff;
+}
+
+.faq {
+    margin-top: 20px;
+}
+
+details {
+    margin-bottom: 15px;
+}
+
+summary {
+    padding: 10px;
+    font-size: 18px;
+    background-color: #4CAF50;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+summary:hover {
+    background-color: #45a049;
+}
+
+p {
+    margin-top: 10px;
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
+a:hover {
+    text-decoration: underline;
+}
