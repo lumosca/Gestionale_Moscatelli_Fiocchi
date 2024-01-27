@@ -7,8 +7,8 @@ body {
     align-items: center;
     min-height: 100vh;
     background-color: #3498db;
-    color: #fff;
-    scroll-behavior: smooth; 
+    color: #333; 
+    scroll-behavior: smooth;
 }
 
 .container {
@@ -26,6 +26,12 @@ h2 {
 
 details {
     margin-bottom: 15px;
+    background-color: #649fb1;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    max-height: 50px; 
+    transition: max-height 0.5s ease;
 }
 
 summary {
@@ -44,12 +50,25 @@ summary:hover {
 }
 
 p {
-    margin-top: 10px;
+    margin: 0;
+    padding: 15px; 
+    opacity: 0;
+    transition: opacity 0.5s ease; 
+}
+
+details[open] {
+    max-height: 200px; 
+    transition: max-height 0.5s ease; 
+}
+
+details[open] p {
+    opacity: 1;
+    transition: opacity 0.5s ease; 
 }
 
 a {
     text-decoration: none;
-    color: #fff;
+    color: #45a049; 
 }
 
 a:hover {
