@@ -14,7 +14,13 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    max-width: 400px; /* Imposta la larghezza massima del box */
+    width: 100%;
+    box-sizing: border-box; /* Evita che il padding aumenti la larghezza del box */
+    max-height: calc(100% - 40px); /* Imposta l'altezza massima del box, considerando il padding */
+    overflow-y: auto; /* Aggiungi una barra di scorrimento se il contenuto è più grande della finestra */
 }
+
 
 form {
     display: flex;
