@@ -46,10 +46,10 @@ document.getElementById("confirmPassword").addEventListener("input", function ()
     const message = document.getElementById("passwordMatchMessage");
 
     if (newPassword === confirmPassword) {
-        message.innerHTML = "Le password corrispondono.";
+        message.innerHTML = "le password corrispondono.";
         message.style.color = "green";
     } else {
-        message.innerHTML = "Le password non corrispondono.";
+        message.innerHTML = "le password non corrispondono.";
         message.style.color = "red";
     }
 });
