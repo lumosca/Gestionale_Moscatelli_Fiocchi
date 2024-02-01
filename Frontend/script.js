@@ -53,3 +53,8 @@ document.getElementById("confirmPassword").addEventListener("input", function ()
         message.style.color = "red";
     }
 });
+
+
+/*async fetch('http://localhost:3000/prenotazione_libri'){
+    await response = 
+}*/
