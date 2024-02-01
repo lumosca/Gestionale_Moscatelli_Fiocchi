@@ -55,6 +55,6 @@ document.getElementById("confirmPassword").addEventListener("input", function ()
 });
 
 
-/*async fetch('http://localhost:3000/prenotazione_libri'){
+/*async fetch('http://localhost:3000/prenotazioni_libri'){
     await response = 
 }*/
