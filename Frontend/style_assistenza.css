@@ -1,3 +1,5 @@
+/* style_assistenza.css */
+
 body {
     font-family: 'Poppins', sans-serif;
     text-align: center;
@@ -43,6 +45,7 @@ summary {
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    border-radius: 12px; /* Aggiunto per rendere il bottone tondeggiante */
 }
 
 summary:hover {
@@ -68,9 +71,15 @@ details[open] p {
 
 a {
     text-decoration: none;
-    color: #45a049; 
+    color: #ffffff; 
+    border-radius: 12px; /* Aggiunto per rendere il link tondeggiante */
+    padding: 10px 20px; /* Aggiunto spazio intorno al testo */
+    background-color: #4c5053; /* Colore del link */
+    transition: background-color 0.7s ease;
+    display: inline-block; /* Per centrare il testo orizzontalmente */
 }
 
 a:hover {
     text-decoration: underline;
+    background-color: #f3f3f3; /* Cambiato colore al passaggio del mouse */
 }

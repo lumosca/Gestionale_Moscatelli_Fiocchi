@@ -3,22 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="login_register.css">
+    <title>Area Amministratore</title>
+    <link rel="stylesheet" href="amministratore.css">
 </head>
 <body>
-    <h2>Login</h2>
-    <form id="loginForm">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required>
-        <br>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-        <br>
-        <button type="button" onclick="login()">Login</button>
-    </form>
-
-    <p>Non sei un amministratore? <a href="login.html">Torna all'accesso</a></p>
+    <div class="container">
+        <h2>Benvenuto nell'Area Amministratore!</h2>
+        <p>Scegli l'operazione che desideri effettuare:</p>
+        <ul>
+            <li><a href="#">Gestione Libri</a></li>
+            <li><a href="#">Gestione Utenti</a></li>
+            <li><a href="#">Statistiche</a></li>
+            <li><a href="#">Modifica Database</a></li>
+            <li><a href="menu.html">Esci</a></li>
+        </ul>
+    </div>
 
     <script src="script.js"></script>
 </body>
