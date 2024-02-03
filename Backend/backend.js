@@ -71,6 +71,16 @@ app.get('/prenotazioni_libri',(req,res) => {
     
 });
 
+function gestisciClic(){
+    if(){
+           
+    }else{
+
+    }
+}
+
+document.getElementById("pulsante").addEventListener("click", gestisciClic);
+
 app.listen(3000, () => {
     console.log('server_startato');
 });
