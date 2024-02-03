@@ -73,9 +73,4 @@ app.get('/prenotazioni_libri',(req,res) => {
 
 app.listen(3000, () => {
     console.log('server_startato');
-<<<<<<< HEAD
 });
-
-=======
-});
->>>>>>> 31fd891e07a1ba6ce6e243f990a6b1a1c8628578
