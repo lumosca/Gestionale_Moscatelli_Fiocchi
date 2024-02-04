@@ -1,74 +1,45 @@
-const fs = require('fs');
-const http = require('http');
-const express = require('express')
-const app = express()
+const express = require('express');
+const app = express();
 
-app.use(express.json())
+app.use(express.json());
 
-const users = [
-    {
-        TitoloLIbro: "1984",
-        Autore: "George Orwell",
-        Genere: "Romanzo distopico"
-    },
-    {
-        TitoloLIbro: "Il Signore degli Anelli",
-        Autore: "J.R.R. Tolkien",
-        Genere: "Fantasy"
-    },
-    {
-        TitoloLIbro: "Il Signore degli Anelli",
-        Autore: "J.R.R. Tolkien",
-        Genere: "Fantasy"
-    },
-    {
-        TitoloLIbro: "Cronache del ghiaccio e del fuoco (Il Trono di Spade)",
-        Autore: "George R.R. Martin",
-        Genere: "Fantasy epico"
-    },
-    {
-        TitoloLIbro: "Orgoglio e pregiudizio",
-        Autore: "Jane Austen",
-        Genere: "Romanzo romantico"
-    },
-    {
-        TitoloLIbro: "Harry Potter e la Pietra Filosofale",
-        Autore: "J.K. Rowling",
-        Genere: "Letteratura fantastica per ragazzi"
-    },
-    /*
-    
-    "Cime tempestose"
+const users = [];
 
-Autore: Emily Brontë
-Genere: Romanzo gotico
-"Il Grande Gatsby"
+// Register endpoint
+app.post('/register', (req, res) => {
+    const { username, password } = req.body;
 
-Autore: F. Scott Fitzgerald
-Genere: Romanzo moderno
-"Cent'anni di solitudine"
+    // Check if the username is already taken
+    if (users.some(user => user.username === username)) {
+        return res.status(400).json({ error: 'Username already exists' });
+    }
 
-Autore: Gabriel García Márquez
-Genere: Realismo magico
-"Lo Hobbit"
+    // Add the new user to the array (in a real-world scenario, you would store this in a database)
+    users.push({ username, password });
 
-Autore: J.R.R. Tolkien
-Genere: Fantasy
-"Moby Dick"
-
-Autore: Herman Melville
-Genere: Romanzo avventuroso
-    
-    */
-];
-
-const html = fs.readFileSync('./Frontend/menu.html', 'utf-8');
-
-const server = http.createServer((req, res) => {
-    res.end(html);
-    console.log('richiesta');
+    res.status(201).json({ message: 'User registered successfully' });
 });
 
-server.listen(4000, () => {
-    console.log('server_startato');
+// Login endpoint
+app.post('/login', (req, res) => {
+    const { username, password } = req.body;
+
+    // Find the user by username
+    const user = users.find(user => user.username === username);
+
+    // Check if the user exists
+    if (!user) {
+        return res.status(401).json({ error: 'Invalid credentials' });
+    }
+
+    // Compare the provided password with the stored password
+    if (user.password === password) {
+        res.json({ message: 'Login successful' });
+    } else {
+        res.status(401).json({ error: 'Invalid credentials' });
+    }
+});
+
+app.listen(3000, () => {
+    console.log('Listening on port 3000');
 });

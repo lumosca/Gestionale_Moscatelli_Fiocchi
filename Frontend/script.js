@@ -20,6 +20,39 @@ function login() {
     }
 }
 
+function login() {
+    // Get values from the form
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    // Make a POST request to the login endpoint (adjust the URL accordingly)
+    fetch('http://localhost:3000/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            username: username,
+            password: password,
+        }),
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Invalid credentials');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Login successful:', data.message);
+        // You can redirect or perform other actions upon successful login
+    })
+    .catch(error => {
+        console.error('Login failed:', error.message);
+        // Handle login failure (display error message, etc.)
+    });
+}
+
+
 function register() {
     const newUsername = document.getElementById("newUsername").value;
     const newPassword = document.getElementById("newPassword").value;
