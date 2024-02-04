@@ -77,3 +77,12 @@ app.post('/aggiungi_libro', (req, res) => {
 app.listen(port, () => {
     console.log(`Server listening at http://localhost:${port}`);
 });
+
+
+const form = document.getElementById('aggiungiLibroForm');
+const listaLibri = document.querySelector('.lista-libri');
+
+form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    aggiungiLibro();
+});

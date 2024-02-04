@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestione Libri</title>
+    <link rel="stylesheet" href="gestione_libri.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Gestione Libri</h2>
+        <form id="aggiungiLibroForm">
+            <label for="titolo">Titolo:</label>
+            <input type="text" id="titolo" name="titolo" required>
+
+            <label for="autore">Autore:</label>
+            <input type="text" id="autore" name="autore" required>
+
+            <label for="genere">Genere:</label>
+            <input type="text" id="genere" name="genere" required>
+
+            <button type="submit">Aggiungi Libro</button>
+        </form>
+
+        <h3>Lista Libri</h3>
+        <ul class="lista-libri"></ul>
+    </div>
+
+    <script src="gestione_libri.js"></script>
+</body>
+</html>
