@@ -1,15 +1,16 @@
 {
-  "name": "gestionale_moscatelli_fiocchi",
+  "dependencies": {
+    "express": "^4.18.2",
+    "fs": "^0.0.1-security"
+  },
+  "name": "app",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "app.js",
+  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
-  "keywords": [],
-  "dependencies": {
-    "express": "^4.18.2"
-  },
   "description": ""
 }
