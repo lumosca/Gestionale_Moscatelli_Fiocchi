@@ -70,7 +70,7 @@ app.use(express.json());
 app.get('/prenotazioni_libri', (req, res) => {
     res.status(200).json(ListaLibri);
 });
-
+/*
 app.get('/ListaLibri/:id', (req, res) => {
     let id = req.params.id;
     let libro = ListaLibri.find((item) => item.id == id);
@@ -115,7 +115,7 @@ app.put('/ListaLibri/:id', (req, res) => {
         res.status(404).send("Libro non trovato");
     }
 });
-
+*/
 app.listen(port, () => {
     console.log(`Server listening at http://localhost:${port}`);
 });
