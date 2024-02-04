@@ -1,22 +1,12 @@
-//const fs = require('fs');
-const http = require('http');
-const express = require('express')
-const app = express()
-
-//const html = fs.readFileSync('./Frontend/menu.html', 'utf-8');
-app.use(express.json())
-
+const express = require('express');
+const app = express();
+const port = 3000;
 
 const ListaLibri = [
     {
         TitoloLibro: "1984",
         Autore: "George Orwell",
         Genere: "Romanzo distopico"
-    },
-    {
-        TitoloLibro: "Il Signore degli Anelli",
-        Autore: "J.R.R. Tolkien",
-        Genere: "Fantasy"
     },
     {
         TitoloLibro: "Il Signore degli Anelli",
@@ -65,22 +55,12 @@ const ListaLibri = [
     }
 ];
 
+app.use(express.json());
 
-app.get('/prenotazioni_libri',(req,res) => {
-    res.status(200).json(ListaLibri)
-    
+app.get('/prenotazioni_libri', (req, res) => {
+    res.status(200).json(ListaLibri);
 });
 
-function gestisciClic(){
-    if(){
-           
-    }else{
-
-    }
-}
-
-document.getElementById("pulsante").addEventListener("click", gestisciClic);
-
-app.listen(3000, () => {
-    console.log('server_startato');
+app.listen(port, () => {
+    console.log(`Server listening at http://localhost:${port}`);
 });
