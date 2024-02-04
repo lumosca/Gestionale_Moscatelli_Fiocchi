@@ -1,0 +1,86 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #3498db;
+    color: #fff;
+}
+
+.feedback-container {
+    width: 80%;
+    max-width: 600px;
+    border-radius: 15px;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #3498db;
+}
+
+form {
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+    color: #333;
+}
+
+textarea {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    resize: none;
+    border-radius: 8px;
+}
+
+.rating-container {
+    margin-top: 10px;
+}
+
+.star-container {
+    display: flex;
+}
+
+.star {
+    cursor: pointer;
+    font-size: 30px;
+    color: #ccc;
+    transition: color 0.3s ease;
+}
+
+.star:hover,
+.star.checked {
+    color: #f39c12;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #4CAF50;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+}

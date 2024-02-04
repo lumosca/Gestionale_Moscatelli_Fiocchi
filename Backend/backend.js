@@ -1,45 +1,86 @@
-const express = require('express');
-const app = express();
+//const fs = require('fs');
+const http = require('http');
+const express = require('express')
+const app = express()
 
-app.use(express.json());
+//const html = fs.readFileSync('./Frontend/menu.html', 'utf-8');
+app.use(express.json())
 
-const users = [];
 
-// Register endpoint
-app.post('/register', (req, res) => {
-    const { username, password } = req.body;
-
-    // Check if the username is already taken
-    if (users.some(user => user.username === username)) {
-        return res.status(400).json({ error: 'Username already exists' });
+const ListaLibri = [
+    {
+        TitoloLibro: "1984",
+        Autore: "George Orwell",
+        Genere: "Romanzo distopico"
+    },
+    {
+        TitoloLibro: "Il Signore degli Anelli",
+        Autore: "J.R.R. Tolkien",
+        Genere: "Fantasy"
+    },
+    {
+        TitoloLibro: "Il Signore degli Anelli",
+        Autore: "J.R.R. Tolkien",
+        Genere: "Fantasy"
+    },
+    {
+        TitoloLibro: "Cronache del ghiaccio e del fuoco (Il Trono di Spade)",
+        Autore: "George R.R. Martin",
+        Genere: "Fantasy epico"
+    },
+    {
+        TitoloLibro: "Orgoglio e pregiudizio",
+        Autore: "Jane Austen",
+        Genere: "Romanzo romantico"
+    },
+    {
+        TitoloLibro: "Harry Potter e la Pietra Filosofale",
+        Autore: "J.K. Rowling",
+        Genere: "Letteratura fantastica per ragazzi"
+    },
+    {
+        TitoloLibro: "Cime tempestose",
+        Autore: "Emily Brontë",
+        Genere: "Romanzo gotico"
+    },
+    {
+        TitoloLibro: "Il Grande Gatsby",
+        Autore: "F. Scott Fitzgerald",
+        Genere: "Romanzo moderno"
+    },
+    {
+        TitoloLibro: "Cent'anni di solitudine",
+        Autore: "Gabriel García Márquez",
+        Genere: "Realismo magico"
+    },
+    {
+        TitoloLibro: "Lo Hobbit",
+        Autore: "J.R.R. Tolkien",
+        Genere: "Fantasy"
+    },
+    {
+        TitoloLibro: "Moby Dick",
+        Autore: "Herman Melville",
+        Genere: "Romanzo avventuroso"
     }
+];
 
-    // Add the new user to the array (in a real-world scenario, you would store this in a database)
-    users.push({ username, password });
 
-    res.status(201).json({ message: 'User registered successfully' });
+app.get('/prenotazioni_libri',(req,res) => {
+    res.status(200).json(ListaLibri)
+    
 });
 
-// Login endpoint
-app.post('/login', (req, res) => {
-    const { username, password } = req.body;
+function gestisciClic(){
+    if(){
+           
+    }else{
 
-    // Find the user by username
-    const user = users.find(user => user.username === username);
-
-    // Check if the user exists
-    if (!user) {
-        return res.status(401).json({ error: 'Invalid credentials' });
     }
+}
 
-    // Compare the provided password with the stored password
-    if (user.password === password) {
-        res.json({ message: 'Login successful' });
-    } else {
-        res.status(401).json({ error: 'Invalid credentials' });
-    }
-});
+document.getElementById("pulsante").addEventListener("click", gestisciClic);
 
 app.listen(3000, () => {
-    console.log('Listening on port 3000');
+    console.log('server_startato');
 });
