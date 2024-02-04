@@ -61,6 +61,19 @@ app.get('/prenotazioni_libri', (req, res) => {
     res.status(200).json(ListaLibri);
 });
 
+app.post('/aggiungi_libro', (req, res) => {
+    const nuovoLibro = req.body;
+
+    if (!nuovoLibro || !nuovoLibro.TitoloLibro || !nuovoLibro.Autore || !nuovoLibro.Genere) {
+        res.status(400).json({ error: 'Il libro deve avere un titolo, un autore e un genere.' });
+        return;
+    }
+
+    ListaLibri.push(nuovoLibro);
+
+    res.status(201).json({ message: 'Libro aggiunto con successo.', libro: nuovoLibro });
+});
+
 app.listen(port, () => {
     console.log(`Server listening at http://localhost:${port}`);
 });
