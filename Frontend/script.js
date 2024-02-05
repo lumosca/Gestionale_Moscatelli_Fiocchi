@@ -15,7 +15,7 @@ function login() {
         const user = users.find(u => u.username === username && u.password === password);
 
         if (user) {
-            alert("Login amministratore riuscito!");
+            
             window.location.href = "amministratore.html";
         } else {
             alert("Credenziali non valide. Riprova.");
