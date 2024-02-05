@@ -116,42 +116,6 @@ app.put('/ListaLibri/:id', (req, res) => {
         res.status(404).send("Libro non trovato");
     }
 });
-const ListaUtenti = [
-    {
-        id: 1,
-        nome: "Mario",
-        cognome: "Rossi",
-        email: "mario.rossi@example.com"
-    },
-    {
-        id: 2,
-        nome: "Luigi",
-        cognome: "Verdi",
-        email: "luigi.verdi@example.com"
-    },
-    // Altri utenti...
-];
-
-app.get('/utenti', (req, res) => {
-    res.status(200).json(ListaUtenti);
-});
-
-app.post('/aggiungiUtente', (req, res) => {
-    const nuovoUtente = req.body;
-
-    if (!nuovoUtente || !nuovoUtente.nome || !nuovoUtente.cognome || !nuovoUtente.email) {
-        res.status(400).json({ error: 'L\'utente deve avere un nome, un cognome e un\'email.' });
-        return;
-    }
-
-    // Assegniamo un nuovo ID in base all'ultimo ID presente nella lista
-    const nuovoId = ListaUtenti.length > 0 ? ListaUtenti[ListaUtenti.length - 1].id + 1 : 1;
-    nuovoUtente.id = nuovoId;
-
-    ListaUtenti.push(nuovoUtente);
-
-    res.status(201).json({ message: 'Utente aggiunto con successo.', utente: nuovoUtente });
-});
 
 app.listen(port, () => {
     console.log(`Server listening at http://localhost:${port}`);
