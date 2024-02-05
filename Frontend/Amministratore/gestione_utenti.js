@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Funzione per caricare la lista degli utenti
     function caricaListaUtenti() {
-        fetch('http://localhost:3000/lista_utenti')
+        fetch('http://localhost:3000/utenti')
             .then(response => response.json())
             .then(utenti => {
                 const listaUtentiBody = document.getElementById('listaUtentiBody');
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Funzione per rimuovere un utente
     window.rimuoviUtente = function(idUtente) {
-        fetch(`http://localhost:3000/rimuovi_utente/${idUtente}`, {
+        fetch(`http://localhost:3000/rimuoviUtente/${idUtente}`, {
             method: 'DELETE',
         })
         .then(response => {
@@ -43,3 +43,5 @@ document.addEventListener('DOMContentLoaded', () => {
     // Carica la lista degli utenti al caricamento della pagina
     caricaListaUtenti();
 });
+
+// Altre funzioni come modificaUtente e aggiungiUtente...
