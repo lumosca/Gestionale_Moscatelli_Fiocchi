@@ -5,20 +5,20 @@ const users = [
 ];
 
 function login() {
-    const username = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
-    if (username === users && password === password) {
+    const enteredUsername = document.getElementById("username").value;
+    const enteredPassword = document.getElementById("password").value;
+
+    const correctUsername = "mattia";  // Sostituisci con il tuo username corretto
+    const correctPassword = "fiocchi";  // Sostituisci con la tua password corretta
+
+    if (enteredUsername === correctUsername && enteredPassword === correctPassword) {
         alert("Login amministratore riuscito!");
-
-        window.location.href = "amministratore.html";
+        window.location.href = "/amministratore/amministratore.html";
     } else {
-        const user = users.find(u => u.username === username && u.password === password);
-
-        if (user) {
-            
-            window.location.href = "amministratore.html";
-        } else {
-            alert("Credenziali non valide. Riprova.");
-        }
+        document.getElementById("username").value = "";
+        document.getElementById("password").value = "";
+        alert("Credenziali non valide. Riprova.");
     }
 }
+
+
