@@ -24,8 +24,10 @@ app.get('/ListaLibri/:id', (req, res) => {
         res.status(404).send("Libro non trovato");
 });
 
-app.post('/ListaLibri', (req, res) => {
-    console.log(req.body);
+app.post('/aggiungiLibro', (req, res) => {
+    console.log('beginmetodolistalibri');
+
+    console.log(req);
     let TitoloLibro = req.body.TitoloLibro;
     let Autore = req.body.Autore;
     let Genere = req.body.Genere;
@@ -81,6 +83,7 @@ app.get('/utenti', (req, res) => {
 });
 
 app.post('/aggiungiUtente', (req, res) => {
+    console.log("AGGIUNGI UTENTE")
     const nuovoUtente = req.body;
 
     if (!nuovoUtente || !nuovoUtente.nome || !nuovoUtente.cognome || !nuovoUtente.email) {

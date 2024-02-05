@@ -1,3 +1,4 @@
+/*
 function aggiungiLibro() {
     const form = document.getElementById('aggiungiLibroForm');
     const titoloLibro = form.querySelector('#titoloLibro').value;
@@ -24,4 +25,4 @@ function aggiungiLibro() {
             // Aggiorna la visualizzazione della lista dei libri sul client, se necessario
         })
         .catch(error => console.error('Errore durante l\'aggiunta del libro:', error));
-}
+}*/
