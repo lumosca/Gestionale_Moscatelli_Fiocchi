@@ -1,5 +1,5 @@
 const form = document.getElementById('aggiungiLibroForm');
-const listaLibri = document.querySelector('.lista-libri');
+const tableBody = document.querySelector('.lista-libri');
 
 form.addEventListener('submit', async function (event) {
     event.preventDefault();
@@ -32,13 +32,38 @@ async function aggiornaListaLibri() {
     const libri = await response.json();
 
     // Aggiorna la tua UI con la nuova lista di libri
-    listaLibri.innerHTML = '';
+    tableBody.innerHTML = '';
+
     libri.forEach(libro => {
-        const listItem = document.createElement('li');
-        listItem.textContent = `${libro.TitoloLibro} - ${libro.Autore} - ${libro.Genere}`;
-        listaLibri.appendChild(listItem);
+        const row = tableBody.insertRow();
+
+        Object.entries(libro).forEach(([key, value]) => {
+            const cell = row.insertCell();
+            cell.textContent = value;
+        });
+
+        const azioniCell = row.insertCell();
+        const modificaButton = document.createElement('button');
+        modificaButton.textContent = 'Modifica';
+        modificaButton.addEventListener('click', () => modificaLibro(libro));
+        azioniCell.appendChild(modificaButton);
+
+        const eliminaButton = document.createElement('button');
+        eliminaButton.textContent = 'Elimina';
+        eliminaButton.addEventListener('click', () => eliminaLibro(libro));
+        azioniCell.appendChild(eliminaButton);
     });
 }
 
-// Chiama la funzione all'avvio per caricare la lista iniziale dei libri
+function modificaLibro(libro) {
+    console.log(`Editing book with ID: ${libro.id}`);
+    // Implement your logic for editing a book
+}
+
+function eliminaLibro(libro) {
+    console.log(`Deleting book with ID: ${libro.id}`);
+    // Implement your logic for deleting a book
+}
+
+// Call the function at the beginning to load the initial list of books
 aggiornaListaLibri();

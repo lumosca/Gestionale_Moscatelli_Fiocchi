@@ -51,6 +51,29 @@ button:hover {
     background-color: #45a049;
 }
 
+.table-container {
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+th, td {
+    border: 1px solid #fff;
+    padding: 15px;
+    text-align: left;
+}
+
+th {
+    background-color: #4CAF50;
+    color: #fff;
+}
+
 .lista-libri {
     list-style-type: none;
     padding: 0;
