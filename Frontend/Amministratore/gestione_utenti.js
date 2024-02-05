@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
         fetch('http://localhost:3000/utenti')
             .then(response => response.json())
             .then(utenti => {
-                const listaUtentiBody = document.getElementById('listaUtentiBody');
+                const listaUtentiBody = document.getElementById('listaUtentiBody'); // Corretto l'id
                 listaUtentiBody.innerHTML = '';
 
                 utenti.forEach(utente => {
@@ -40,8 +40,31 @@ document.addEventListener('DOMContentLoaded', () => {
         .catch(error => console.error('Errore durante la rimozione dell\'utente:', error));
     };
 
+    // Funzione per aggiungere un utente
+    window.aggiungiUtente = function() {
+        const nuovoUtente = {
+            nome: "Nuovo",
+            cognome: "Utente",
+            email: "nuovo.utente@example.com"
+        };
+
+        fetch('http://localhost:3000/aggiungiUtente', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(nuovoUtente),
+        })
+            .then(response => {
+                if (response.ok) {
+                    caricaListaUtenti(); // Aggiorna la lista degli utenti
+                } else {
+                    console.error('Errore durante l\'aggiunta dell\'utente');
+                }
+            })
+            .catch(error => console.error('Errore durante l\'aggiunta dell\'utente:', error));
+    };
+
     // Carica la lista degli utenti al caricamento della pagina
     caricaListaUtenti();
 });
-
-// Altre funzioni come modificaUtente e aggiungiUtente...
