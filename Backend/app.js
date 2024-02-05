@@ -6,30 +6,8 @@ const port = 3000;
 app.use(express.json());
 app.use(cors());
 
-// JavaScript
-function aggiungiUtente() {
-    const nuovoUtente = {
-        nome: "Nuovo",
-        cognome: "Utente",
-        email: "nuovo.utente@example.com"
-    };
-
-    fetch('http://localhost:3000/aggiungiUtente', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(nuovoUtente),
-    })
-    .then(response => {
-        if (response.ok) {
-            caricaListaUtenti(); // Aggiorna la lista degli utenti
-        } else {
-            console.error('Errore durante l\'aggiunta dell\'utente');
-        }
-    })
-    .catch(error => console.error('Errore durante l\'aggiunta dell\'utente:', error));
-}
+// Dichiarato ListaLibri
+let ListaLibri = [];
 
 // Rotte per la gestione dei libri
 app.get('/prenotazioni_libri', (req, res) => {
@@ -53,7 +31,8 @@ app.post('/ListaLibri', (req, res) => {
     let Genere = req.body.Genere;
 
     if (TitoloLibro && Autore && Genere) {
-        let id = ListaLibri[ListaLibri.length - 1].id + 1;
+        let id = ListaLibri.length > 0 ? ListaLibri[ListaLibri.length - 1].id + 1 : 1;
+
         const nuovoLibro = {
             id,
             TitoloLibro,
@@ -81,21 +60,18 @@ app.put('/ListaLibri/:id', (req, res) => {
     }
 });
 
-app.use(express.json());
-app.use(cors());
-
 let ListaUtenti = [
     {
         id: 1,
-        nome: "Mario",
-        cognome: "Rossi",
-        email: "mario.rossi@example.com"
+        nome: "Simone",
+        cognome: "Austeri",
+        email: "simone.austeri@ittterni.org"
     },
     {
         id: 2,
-        nome: "Luigi",
-        cognome: "Verdi",
-        email: "luigi.verdi@example.com"
+        nome: "Francesco",
+        cognome: "Magaletti",
+        email: "francesco.magaletti@ittterni.org"
     },
     // Altri utenti...
 ];
@@ -128,11 +104,6 @@ app.delete('/rimuoviUtente/:id', (req, res) => {
 
     res.status(200).json({ message: 'Utente rimosso con successo.', id: idUtente });
 });
-
-app.listen(port, () => {
-    console.log(`Server listening at http://localhost:${port}`);
-});
-
 
 app.listen(port, () => {
     console.log(`Server listening at http://localhost:${port}`);

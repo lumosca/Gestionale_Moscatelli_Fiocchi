@@ -1,69 +1,78 @@
-const form = document.getElementById('aggiungiLibroForm');
-const tableBody = document.querySelector('.lista-libri');
+const tableBody = document.getElementById('listaLibriBody');
 
-form.addEventListener('submit', async function (event) {
-    event.preventDefault();
+function aggiungiLibro() {
+    const nuovoLibro = {
+        TitoloLibro: prompt("Inserisci il titolo del libro:"),
+        Autore: prompt("Inserisci l'autore del libro:"),
+        Genere: prompt("Inserisci il genere del libro:")
+    };
 
-    const titolo = document.getElementById('titolo').value;
-    const autore = document.getElementById('autore').value;
-    const genere = document.getElementById('genere').value;
-
-    const response = await fetch('http://localhost:3000/ListaLibri', {
+    fetch('http://localhost:3000/ListaLibri', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-            TitoloLibro: titolo,
-            Autore: autore,
-            Genere: genere,
-        }),
-    });
-
-    const data = await response.json();
-    console.log(data);
-
-    // Aggiorna la lista dei libri
-    aggiornaListaLibri();
-});
-
-async function aggiornaListaLibri() {
-    const response = await fetch('http://localhost:3000/prenotazioni_libri');
-    const libri = await response.json();
-
-    // Aggiorna la tua UI con la nuova lista di libri
-    tableBody.innerHTML = '';
-
-    libri.forEach(libro => {
-        const row = tableBody.insertRow();
-
-        Object.entries(libro).forEach(([key, value]) => {
-            const cell = row.insertCell();
-            cell.textContent = value;
-        });
-
-        const azioniCell = row.insertCell();
-        const modificaButton = document.createElement('button');
-        modificaButton.textContent = 'Modifica';
-        modificaButton.addEventListener('click', () => modificaLibro(libro));
-        azioniCell.appendChild(modificaButton);
-
-        const eliminaButton = document.createElement('button');
-        eliminaButton.textContent = 'Elimina';
-        eliminaButton.addEventListener('click', () => eliminaLibro(libro));
-        azioniCell.appendChild(eliminaButton);
-    });
+        body: JSON.stringify(nuovoLibro),
+    })
+    .then(response => {
+        if (response.ok) {
+            aggiornaListaLibri(); // Aggiorna la lista dei libri
+        } else {
+            console.error('Errore durante l\'aggiunta del libro');
+        }
+    })
+    .catch(error => console.error('Errore durante l\'aggiunta del libro:', error));
 }
 
-function modificaLibro(libro) {
-    console.log(`Editing book with ID: ${libro.id}`);
-    // Implement your logic for editing a book
+function modificaLibro(libroId) {
+    // Implementa la logica per la modifica del libro
+    console.log(`Modifica del libro con ID: ${libroId}`);
 }
 
-function eliminaLibro(libro) {
-    console.log(`Deleting book with ID: ${libro.id}`);
-    // Implement your logic for deleting a book
+function eliminaLibro(libroId) {
+    fetch(`http://localhost:3000/ListaLibri/${libroId}`, {
+        method: 'DELETE',
+    })
+    .then(response => {
+        if (response.ok) {
+            aggiornaListaLibri(); // Aggiorna la lista dei libri
+        } else {
+            console.error('Errore durante l\'eliminazione del libro');
+        }
+    })
+    .catch(error => console.error('Errore durante l\'eliminazione del libro:', error));
 }
 
-// Call the function at the beginning to load the initial list of books
+function aggiornaListaLibri() {
+    fetch('http://localhost:3000/ListaLibri')
+        .then(response => response.json())
+        .then(libri => {
+            // Aggiorna la tua UI con la nuova lista di libri
+            tableBody.innerHTML = '';
+
+            libri.forEach(libro => {
+                const row = tableBody.insertRow();
+
+                Object.values(libro).forEach(value => {
+                    const cell = row.insertCell();
+                    cell.textContent = value;
+                });
+
+                const azioniCell = row.insertCell();
+
+                const modificaButton = document.createElement('button');
+                modificaButton.textContent = 'Modifica';
+                modificaButton.addEventListener('click', () => modificaLibro(libro.id));
+                azioniCell.appendChild(modificaButton);
+
+                const eliminaButton = document.createElement('button');
+                eliminaButton.textContent = 'Elimina';
+                eliminaButton.addEventListener('click', () => eliminaLibro(libro.id));
+                azioniCell.appendChild(eliminaButton);
+            });
+        })
+        .catch(error => console.error('Errore durante il recupero della lista dei libri:', error));
+}
+
+// Chiama la funzione all'avvio per caricare la lista iniziale dei libri
 aggiornaListaLibri();
