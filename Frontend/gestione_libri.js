@@ -8,7 +8,7 @@ form.addEventListener('submit', async function (event) {
     const autore = document.getElementById('autore').value;
     const genere = document.getElementById('genere').value;
 
-    const response = await fetch('http://localhost:3000/aggiungi_libro', {
+    const response = await fetch('http://localhost:3000/ListaLibri', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
