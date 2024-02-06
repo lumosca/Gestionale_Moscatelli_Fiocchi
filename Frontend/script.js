@@ -8,9 +8,6 @@ function login() {
     const enteredUsername = document.getElementById("username").value;
     const enteredPassword = document.getElementById("password").value;
 
-    const correctUsername = "mattia";  // Sostituisci con il tuo username corretto
-    const correctPassword = "fiocchi";  // Sostituisci con la tua password corretta
-
     if (enteredUsername === correctUsername && enteredPassword === correctPassword) {
         alert("Login amministratore riuscito!");
         window.location.href = "/amministratore/amministratore.html";

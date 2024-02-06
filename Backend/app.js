@@ -23,7 +23,26 @@ app.get('/ListaLibri/:id', (req, res) => {
     else
         res.status(404).send("Libro non trovato");
 });
+let prenotazioniLibri = [];
 
+app.post('/prenotaLibro', (req, res) => {
+    const nuovaPrenotazione = req.body;
+
+    if (!nuovaPrenotazione.titoloLibro || !nuovaPrenotazione.autore || !nuovaPrenotazione.genere) {
+        res.status(400).json({ error: 'La prenotazione deve contenere il titolo del libro, l\'autore e il genere.' });
+        return;
+    }
+
+    nuovaPrenotazione.id = prenotazioniLibri.length > 0 ? prenotazioniLibri[prenotazioniLibri.length - 1].id + 1 : 1;
+
+    prenotazioniLibri.push(nuovaPrenotazione);
+
+    res.status(201).json(nuovaPrenotazione);
+});
+
+app.get('/prenotazioniLibri', (req, res) => {
+    res.status(200).json(prenotazioniLibri);
+});
 app.post('/aggiungiLibro', (req, res) => {
     console.log('beginmetodolistalibri');
 

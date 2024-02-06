@@ -47,3 +47,8 @@ a {
 a:hover {
     background-color: #45a049;
 }
+body {
+    background-image: url('libreria.jpg');
+    background-size: cover; /* Per coprire l'intera area del corpo */
+    background-position: center; /* Posiziona l'immagine al centro */
+}
