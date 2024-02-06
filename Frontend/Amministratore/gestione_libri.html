@@ -7,23 +7,34 @@
     <link rel="stylesheet" href="gestione_libri.css">
 </head>
 <body>
+    <header>
+        <div class="container">
+            <a href="amministratore.html" class="btn-back">Torna all'Area Amministratore</a>
+        </div>
+    </header>
+
     <div class="container">
+        <h1>Aggiungi un Nuovo Libro</h1>
+        
         <form id="aggiungiLibroForm">
-            <label for="titolo">Titolo:</label>
-            <input type="text" id="titolo" name="titolo" required>
-            <br>
-            <label for="autore">Autore:</label>
-            <input type="text" id="autore" name="autore" required>
-            <br>
-            <label for="genere">Genere:</label>
-            <select id="genere" name="genere">
-                <option value="Romanzo">Romanzo</option>
-                <option value="Fantascienza">Fantascienza</option>
-                <option value="Thriller">Thriller</option>
-                <option value="Storia">Storia</option>
-            </select>
-            <br>            
-            <button type="button" onclick="aggiungiLibro()">Aggiungi Libro</button>        
+            <div class="form-group">
+                <label for="titolo">Titolo:</label>
+                <input type="text" id="titolo" name="titolo" required>
+            </div>
+            <div class="form-group">
+                <label for="autore">Autore:</label>
+                <input type="text" id="autore" name="autore" required>
+            </div>
+            <div class="form-group">
+                <label for="genere">Genere:</label>
+                <select id="genere" name="genere">
+                    <option value="Romanzo">Romanzo</option>
+                    <option value="Fantascienza">Fantascienza</option>
+                    <option value="Thriller">Thriller</option>
+                    <option value="Storia">Storia</option>
+                </select>
+            </div>
+            <button type="button" onclick="aggiungiLibro()">Aggiungi Libro</button>
         </form>
 
         <h2>Lista Libri</h2>

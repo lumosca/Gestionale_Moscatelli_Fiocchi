@@ -55,3 +55,29 @@ function aggiungiLibro() {
 }
 
 // Funzioni modificaLibro() e eliminaLibro() vanno implementate se necessario
+function modificaLibro(idLibro) {
+    const titoloCell = document.querySelector(`#titolo-${idLibro}`);
+    const autoreCell = document.querySelector(`#autore-${idLibro}`);
+    const genereCell = document.querySelector(`#genere-${idLibro}`);
+
+    // Rendi le celle scrivibili
+    titoloCell.contentEditable = true;
+    autoreCell.contentEditable = true;
+    genereCell.contentEditable = true;
+}
+
+function eliminaLibro(idLibro) {
+    if (confirm("Sei sicuro di voler eliminare questo libro?")) {
+        fetch(`http://localhost:3000/ListaLibri/${idLibro}`, {
+            method: 'DELETE'
+        })
+        .then(response => {
+            if (response.ok) {
+                caricaListaLibri(); // Aggiorna la lista dei libri dopo l'eliminazione
+            } else {
+                console.error('Errore durante l\'eliminazione del libro');
+            }
+        })
+        .catch(error => console.error('Errore durante l\'eliminazione del libro:', error));
+    }
+}
