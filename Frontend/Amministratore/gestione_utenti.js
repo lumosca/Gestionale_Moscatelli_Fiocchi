@@ -42,11 +42,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Funzione per aggiungere un utente
     window.aggiungiUtente = function() {
-        const nuovoUtente = {
-            nome: "Nuovo",
-            cognome: "Utente",
-            email: "nuovo.utente@example.com"
-        };
+        
+            const Nome = document.getElementById('nome').value;
+            const Congome = document.getElementById('cognome').value;
+            const Email = document.getElementById('email').value;
         
         fetch('http://localhost:3000/aggiungiUtente', {
             method: 'POST',
