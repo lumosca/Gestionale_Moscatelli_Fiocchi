@@ -42,11 +42,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Funzione per aggiungere un utente
     window.aggiungiUtente = function() {
-        
-            const Nome = document.getElementById('nome').value;
-            const Congome = document.getElementById('cognome').value;
-            const Email = document.getElementById('email').value;
-        
+        const nome = document.getElementById('nome').value;
+        const cognome = document.getElementById('cognome').value;
+        const email = document.getElementById('email').value;
+    
+        const nuovoUtente = {
+            nome: nome,
+            cognome: cognome,
+            email: email
+        };
+    
         fetch('http://localhost:3000/aggiungiUtente', {
             method: 'POST',
             headers: {
@@ -54,15 +59,16 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             body: JSON.stringify(nuovoUtente),
         })
-            .then(response => {
-                if (response.ok) {
-                    caricaListaUtenti(); // Aggiorna la lista degli utenti
-                } else {
-                    console.error('Errore durante l\'aggiunta dell\'utente');
-                }
-            })
-            .catch(error => console.error('Errore durante l\'aggiunta dell\'utente:', error));
+        .then(response => {
+            if (response.ok) {
+                caricaListaUtenti(); // Aggiorna la lista degli utenti
+            } else {
+                console.error('Errore durante l\'aggiunta dell\'utente');
+            }
+        })
+        .catch(error => console.error('Errore durante l\'aggiunta dell\'utente:', error));
     };
+        
 
     // Carica la lista degli utenti al caricamento della pagina
     caricaListaUtenti();
