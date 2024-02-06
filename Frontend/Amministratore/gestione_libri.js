@@ -18,6 +18,7 @@ function caricaListaLibri() {
                     <td>
                         <button onclick="modificaLibro(${libro.id})">Modifica</button>
                         <button onclick="eliminaLibro(${libro.id})">Elimina</button>
+                        <button onclick="confermaModifiche(${libro.id})">Conferma Modifiche</button>
                     </td>
                 `;
                 tableBody.appendChild(row);
@@ -78,4 +79,32 @@ function eliminaLibro(idLibro) {
         })
         .catch(error => console.error('Errore durante l\'eliminazione del libro:', error));
     }
+}
+
+function confermaModifiche(idLibro) {
+    const titolo = document.getElementById(`titolo-${idLibro}`).innerText;
+    const autore = document.getElementById(`autore-${idLibro}`).innerText;
+    const genere = document.getElementById(`genere-${idLibro}`).innerText;
+
+    const libroModificato = {
+        TitoloLibro: titolo,
+        Autore: autore,
+        Genere: genere
+    };
+
+    fetch(`http://localhost:3000/ListaLibri/${idLibro}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(libroModificato)
+    })
+    .then(response => {
+        if (response.ok) {
+            caricaListaLibri(); // Aggiorna la lista dei libri dopo la modifica
+        } else {
+            console.error('Errore durante il salvataggio delle modifiche del libro');
+        }
+    })
+    .catch(error => console.error('Errore durante il salvataggio delle modifiche del libro:', error));
 }
