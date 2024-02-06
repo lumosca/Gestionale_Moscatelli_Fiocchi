@@ -68,7 +68,61 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .catch(error => console.error('Errore durante l\'aggiunta dell\'utente:', error));
     };
+
+    // Funzione per modificare un utente
+window.modificaUtente = function(idUtente) {
+    // Trova la riga corrispondente all'idUtente
+    const riga = document.getElementById(`riga-${idUtente}`);
+    
+    // Trova i campi di testo all'interno della riga
+    const campiTesto = riga.querySelectorAll('td:not(:first-child)');
+    
+    // Imposta i campi di testo come editabili
+    campiTesto.forEach(campo => {
+        const valoreAttuale = campo.textContent;
+        campo.innerHTML = `<input type="text" value="${valoreAttuale}">`;
+    });
+
+    // Sostituisci il pulsante "Modifica" con il pulsante "Salva"
+    const pulsanteModifica = riga.querySelector('.pulsante-modifica');
+    pulsanteModifica.innerHTML = `<button onclick="salvaModifiche(${idUtente})">Salva</button>`;
+};
+
+    // Funzione per salvare le modifiche di un utente
+    window.salvaModifiche = function(idUtente) {
+        // Trova la riga corrispondente all'idUtente
+        const riga = document.getElementById(`riga-${idUtente}`);
         
+        // Trova i campi di input all'interno della riga
+        const campiInput = riga.querySelectorAll('input');
+
+        // Crea un oggetto per contenere i nuovi valori
+        const nuoviValori = {
+            nome: campiInput[0].value,
+            cognome: campiInput[1].value,
+            email: campiInput[2].value
+        };
+
+        // Invia una richiesta PUT al server per aggiornare l'utente
+        fetch(`http://localhost:3000/ListaUtenti/${idUtente}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(nuoviValori),
+        })
+        .then(response => {
+            if (response.ok) {
+                // Aggiorna la lista degli utenti dopo il salvataggio
+                caricaListaUtenti();
+            } else {
+                console.error('Errore durante il salvataggio delle modifiche dell\'utente');
+            }
+        })
+        .catch(error => console.error('Errore durante il salvataggio delle modifiche dell\'utente:', error));
+    };
+
+
 
     // Carica la lista degli utenti al caricamento della pagina
     caricaListaUtenti();
