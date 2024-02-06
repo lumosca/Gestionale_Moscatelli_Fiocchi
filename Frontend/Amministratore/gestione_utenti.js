@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
             cognome: "Utente",
             email: "nuovo.utente@example.com"
         };
-
+        
         fetch('http://localhost:3000/aggiungiUtente', {
             method: 'POST',
             headers: {

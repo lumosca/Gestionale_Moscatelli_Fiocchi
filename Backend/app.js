@@ -31,7 +31,7 @@ app.post('/aggiungiLibro', (req, res) => {
     let TitoloLibro = req.body.TitoloLibro;
     let Autore = req.body.Autore;
     let Genere = req.body.Genere;
-
+    
     if (TitoloLibro && Autore && Genere) {
         let id = ListaLibri.length > 0 ? ListaLibri[ListaLibri.length - 1].id + 1 : 1;
 

@@ -1,20 +1,19 @@
 const tableBody = document.getElementById('listaLibriBody');
 
-document.addEventListener('DOMContentLoaded', () => {
-    function aggiungiLibro() {
+ function aggiungiLibro() {
         console.log(`inizio: `);
     //console.log(document.getElementById('titolo').value);
-    
-        const nuovoLibro = {
+
+        var nuovoLibro = {
     
             TitoloLibro: document.getElementById('titolo').value,
             Autore: document.getElementById('autore').value,
-            Genere: document.getElementById('genere').value 
-    
+            Genere: 'GIALLO' //document.getElementById('genere').value
         };
-        console.log(`begin agggiungi ibro: `);
+       
         console.log(nuovoLibro);
-    
+        console.log(JSON.stringify(nuovoLibro));
+
         fetch('http://localhost:3000/aggiungiLibro', {
             method: 'POST',
             headers: {
@@ -33,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .catch(error => console.error('eccezione l\'aggiunta del libro:', error));
     }
     
-})
+
 
 /*
 function modificaLibro(libroId) {
