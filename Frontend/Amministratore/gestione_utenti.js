@@ -72,28 +72,45 @@ document.addEventListener('DOMContentLoaded', () => {
     // Funzione per modificare un utente
 // Funzione per modificare un utente
 
+document.addEventListener('DOMContentLoaded', () => {
+    // Tutto il codice qui dentro verrà eseguito solo dopo che il documento è stato completamente caricato
+    window.modificaUtente = function(idUtente) {
+        // Trova la riga corrispondente all'idUtente
 
+        window.modificaUtente = function(idUtente) {
+            // Trova l'elemento corrispondente all'IDUtente
+            const idRiga = `riga-${idUtente}`;
+            console.log("ID della riga:", idRiga);
+            const riga = document.getElementById(idRiga);
+            console.log("Riga trovata:", riga);
+        
+            // Continua con il resto del codice...
+        };
+        
+        const riga = document.getElementById(`riga-${idUtente}`);
+        
+        // Trova i campi di testo all'interno della riga
+        const campiTesto = riga.querySelectorAll('td:not(:first-child)');
+
+        
+        
+        // Imposta i campi di testo come editabili
+        campiTesto.forEach(campo => {
+            const valoreAttuale = campo.textContent;
+            campo.innerHTML = `<input type="text" value="${valoreAttuale}">`;
+        });
+    
+        // Sostituisci il pulsante "Modifica" con i pulsanti "Conferma" e "Annulla"
+        const pulsanteModifica = riga.querySelector('.pulsante-modifica');
+        pulsanteModifica.innerHTML = `
+            <button onclick="confermaModifiche(${idUtente})">Conferma</button>
+            <button onclick="annullaModifiche(${idUtente})">Annulla</button>
+        `;
+    };
+    // Aggiungi la tua funzione modificaUtente qui dentro
+});
 // Funzione per modificare un utente
-window.modificaUtente = function(idUtente) {
-    // Trova la riga corrispondente all'idUtente
-    const riga = document.getElementById(`riga-${idUtente}`);
-    
-    // Trova i campi di testo all'interno della riga
-    const campiTesto = riga.querySelectorAll('td:not(:first-child)');
-    
-    // Imposta i campi di testo come editabili
-    campiTesto.forEach(campo => {
-        const valoreAttuale = campo.textContent;
-        campo.innerHTML = `<input type="text" value="${valoreAttuale}">`;
-    });
 
-    // Sostituisci il pulsante "Modifica" con i pulsanti "Conferma" e "Annulla"
-    const pulsanteModifica = riga.querySelector('.pulsante-modifica');
-    pulsanteModifica.innerHTML = `
-        <button onclick="confermaModifiche(${idUtente})">Conferma</button>
-        <button onclick="annullaModifiche(${idUtente})">Annulla</button>
-    `;
-};
 
     // Funzione per salvare le modifiche di un utente
     window.salvaModifiche = function(idUtente) {
