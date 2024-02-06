@@ -17,8 +17,6 @@ h2 {
 }
 
 form {
-    display: flex;
-    flex-direction: column;
     margin-bottom: 20px;
 }
 
@@ -28,8 +26,8 @@ label {
     color: #fff;
 }
 
-input {
-    width: 100%;
+input, select {
+    width: calc(100% - 22px); /* Considera il padding */
     padding: 10px;
     margin-bottom: 20px;
     border: 1px solid #ccc;

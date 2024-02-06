@@ -1,58 +1,57 @@
-const tableBody = document.getElementById('listaLibriBody');
+document.addEventListener('DOMContentLoaded', () => {
+    caricaListaLibri(); // Carica la lista dei libri all'avvio della pagina
+});
 
- function aggiungiLibro() {
-        console.log(`inizio: `);
-    //console.log(document.getElementById('titolo').value);
+function caricaListaLibri() {
+    const tableBody = document.getElementById('listaLibriBody');
+    tableBody.innerHTML = ''; // Pulisce la tabella prima di aggiornarla
 
-        var nuovoLibro = {
-    
-            TitoloLibro: document.getElementById('titolo').value,
-            Autore: document.getElementById('autore').value,
-            Genere: 'GIALLO' //document.getElementById('genere').value
-        };
-       
-        console.log(nuovoLibro);
-        console.log(JSON.stringify(nuovoLibro));
-
-        fetch('http://localhost:3000/aggiungiLibro', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(nuovoLibro)
+    fetch('http://localhost:3000/prenotazioni_libri')
+        .then(response => response.json())
+        .then(libri => {
+            libri.forEach(libro => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${libro.TitoloLibro}</td>
+                    <td>${libro.Autore}</td>
+                    <td>${libro.Genere}</td>
+                    <td>
+                        <button onclick="modificaLibro(${libro.id})">Modifica</button>
+                        <button onclick="eliminaLibro(${libro.id})">Elimina</button>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
         })
-        .then(response => {
-            if (response.ok) {
-                //aggiornaListaLibri(); // Aggiorna la lista dei libri
-               console.log("OK");
-            } else {
-                console.error('Errore durante l\'aggiunta del libro');
-            }
-        })
-        .catch(error => console.error('eccezione l\'aggiunta del libro:', error));
-    }
-    
-
-
-/*
-function modificaLibro(libroId) {
-    // Implementa la logica per la modifica del libro
-    console.log(`Modifica del libro con ID: ${libroId}`);
+        .catch(error => console.error('Errore durante il caricamento dei libri:', error));
 }
 
-function eliminaLibro(libroId) {
-    fetch(`http://localhost:3000/ListaLibri/${libroId}`, {
-        method: 'DELETE',
+function aggiungiLibro() {
+    const titolo = document.getElementById('titolo').value;
+    const autore = document.getElementById('autore').value;
+    const genere = document.getElementById('genere').value;
+
+    const nuovoLibro = {
+        TitoloLibro: titolo,
+        Autore: autore,
+        Genere: genere
+    };
+
+    fetch('http://localhost:3000/aggiungiLibro', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(nuovoLibro)
     })
     .then(response => {
         if (response.ok) {
-            aggiornaListaLibri(); // Aggiorna la lista dei libri
+            caricaListaLibri(); // Aggiorna la lista dei libri dopo l'aggiunta
         } else {
-            console.error('Errore durante l\'eliminazione del libro');
+            console.error('Errore durante l\'aggiunta del libro');
         }
     })
-    .catch(error => console.error('Errore durante l\'eliminazione del libro:', error));
+    .catch(error => console.error('Errore durante l\'aggiunta del libro:', error));
 }
-*/
-// Chiama la funzione all'avvio per caricare la lista iniziale dei libri
-//aggiornaListaLibri();
+
+// Funzioni modificaLibro() e eliminaLibro() vanno implementate se necessario

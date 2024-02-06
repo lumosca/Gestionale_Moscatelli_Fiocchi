@@ -16,9 +16,14 @@
             <input type="text" id="autore" name="autore" required>
             <br>
             <label for="genere">Genere:</label>
-            <input type="text" id="genere" name="genere" required>
+            <select id="genere" name="genere">
+                <option value="Romanzo">Romanzo</option>
+                <option value="Fantascienza">Fantascienza</option>
+                <option value="Thriller">Thriller</option>
+                <option value="Storia">Storia</option>
+            </select>
             <br>            
-            <button onclick="aggiungiLibro()">Aggiungi Libro</button>        
+            <button type="button" onclick="aggiungiLibro()">Aggiungi Libro</button>        
         </form>
 
         <h2>Lista Libri</h2>
@@ -31,7 +36,7 @@
                     <th>Azioni</th>
                 </tr>
             </thead>
-            <tbody class="lista-libri"></tbody>
+            <tbody id="listaLibriBody"></tbody>
         </table>
     </div>
 
