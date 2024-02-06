@@ -6,34 +6,27 @@ const port = 3000;
 app.use(express.json());
 app.use(cors());
 
-// Dichiarato ListaLibri
 let ListaLibri = [];
 
-// Rotte per la gestione dei libri
 app.get('/prenotazioni_libri', (req, res) => {
     res.status(200).json(ListaLibri);
 });
 
 app.get('/ListaLibri/:id', (req, res) => {
-    let id = req.params.id;
-    let libro = ListaLibri.find((item) => item.id == id);
+    const id = req.params.id;
+    const libro = ListaLibri.find(item => item.id == id);
 
-    if (libro != undefined)
+    if (libro !== undefined)
         res.json(libro);
     else
         res.status(404).send("Libro non trovato");
 });
 
 app.post('/aggiungiLibro', (req, res) => {
-    console.log('beginmetodolistalibri');
-
-    console.log(req);
-    let TitoloLibro = req.body.TitoloLibro;
-    let Autore = req.body.Autore;
-    let Genere = req.body.Genere;
+    const { TitoloLibro, Autore, Genere } = req.body;
     
     if (TitoloLibro && Autore && Genere) {
-        let id = ListaLibri.length > 0 ? ListaLibri[ListaLibri.length - 1].id + 1 : 1;
+        const id = ListaLibri.length > 0 ? ListaLibri[ListaLibri.length - 1].id + 1 : 1;
 
         const nuovoLibro = {
             id,
@@ -50,16 +43,25 @@ app.post('/aggiungiLibro', (req, res) => {
 });
 
 app.put('/ListaLibri/:id', (req, res) => {
-    let id = req.params.id;
-    let libroIndex = ListaLibri.findIndex((item) => item.id == id);
+    const id = req.params.id;
+    const { TitoloLibro, Autore, Genere } = req.body;
+    
+    const libroIndex = ListaLibri.findIndex(item => item.id == id);
 
     if (libroIndex >= 0) {
-        let updatedLibro = req.body;
-        ListaLibri[libroIndex] = { ...ListaLibri[libroIndex], ...updatedLibro };
+        ListaLibri[libroIndex] = { ...ListaLibri[libroIndex], TitoloLibro, Autore, Genere };
         res.json(ListaLibri[libroIndex]);
     } else {
         res.status(404).send("Libro non trovato");
     }
+});
+
+app.delete('/eliminaLibro/:id', (req, res) => {
+    const idLibro = req.params.id;
+
+    ListaLibri = ListaLibri.filter(libro => libro.id !== parseInt(idLibro));
+
+    res.status(200).json({ message: 'Libro eliminato con successo.' });
 });
 
 let ListaUtenti = [

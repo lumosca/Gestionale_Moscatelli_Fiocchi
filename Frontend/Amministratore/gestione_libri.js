@@ -12,9 +12,9 @@ function caricaListaLibri() {
             libri.forEach(libro => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
-                    <td>${libro.TitoloLibro}</td>
-                    <td>${libro.Autore}</td>
-                    <td>${libro.Genere}</td>
+                    <td id="titolo-${libro.id}">${libro.TitoloLibro}</td>
+                    <td id="autore-${libro.id}">${libro.Autore}</td>
+                    <td id="genere-${libro.id}">${libro.Genere}</td>
                     <td>
                         <button onclick="modificaLibro(${libro.id})">Modifica</button>
                         <button onclick="eliminaLibro(${libro.id})">Elimina</button>
@@ -54,13 +54,11 @@ function aggiungiLibro() {
     .catch(error => console.error('Errore durante l\'aggiunta del libro:', error));
 }
 
-// Funzioni modificaLibro() e eliminaLibro() vanno implementate se necessario
 function modificaLibro(idLibro) {
     const titoloCell = document.querySelector(`#titolo-${idLibro}`);
     const autoreCell = document.querySelector(`#autore-${idLibro}`);
     const genereCell = document.querySelector(`#genere-${idLibro}`);
 
-    // Rendi le celle scrivibili
     titoloCell.contentEditable = true;
     autoreCell.contentEditable = true;
     genereCell.contentEditable = true;
