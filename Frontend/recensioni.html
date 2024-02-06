@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<a href="recensioni.css"></a>
+<title>Recensione del Sito Web</title>
+</head>
+<body>
+
+<form id="reviewForm" action="/submit-review" method="post">
+  <label for="author">Autore:</label>
+  <input type="text" id="author" name="author" required><br>
+  
+  <label for="rating">Valutazione:</label>
+  <input type="number" id="rating" name="rating" min="1" max="5" step="0.1" required><br>
+  
+  <label for="content">Recensione:</label><br>
+  <textarea id="content" name="content" rows="4" required></textarea><br>
+  
+  <button type="submit">Invia Recensione</button>
+</form>
+
+<div id="reviews">
+  <!-- Qui verranno visualizzate le recensioni -->
+</div>
+
+<script>
+  // Codice JavaScript per aggiornare le recensioni dopo l'invio del modulo
+  const reviewForm = document.getElementById('reviewForm');
+  const reviewsDiv = document.getElementById('reviews');
+
+  reviewForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    
+    const formData = new FormData(reviewForm);
+    const response = await fetch('/submit-review', {
+      method: 'POST',
+      body: formData
+    });
+
+    if (response.ok) {
+      fetchReviews();
+    } else {
+      console.error('Errore durante l\'invio della recensione.');
+    }
+  });
+
+  // Funzione per caricare le recensioni dal server
+  async function fetchReviews() {
+    const response = await fetch('/get-reviews');
+    if (response.ok) {
+      const reviews = await response.json();
+      displayReviews(reviews);
+    } else {
+      console.error('Errore durante il recupero delle recensioni dal server.');
+    }
+  }
+
+  // Funzione per visualizzare le recensioni nell'HTML
+  function displayReviews(reviews) {
+    reviewsDiv.innerHTML = '';
+    reviews.forEach(review => {
+      const reviewElement = document.createElement('div');
+      reviewElement.innerHTML = `
+        <div class="review">
+          <h2 class="rating">Valutazione: <span class="rating">${review.rating}</span>/5</h2>
+          <p class="author">${review.author}</p>
+          <p class="date">${review.date}<   /p>
+          <p class="content">${review.content}</p>
+        </div>
+      `;
+      reviewsDiv.appendChild(reviewElement);
+    });
+  }
+
+  // Carica le recensioni al caricamento della pagina
+  fetchReviews();
+</script>
+
+<script src="recensioni.js"> </script>
+
+</body>
+</html>
