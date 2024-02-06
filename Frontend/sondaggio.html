@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sondaggio Clienti</title>
+  <link rel="stylesheet" href="sondaggio.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Sondaggio Clienti</h1>
+    <form id="surveyForm">
+      <div class="form-group">
+        <label for="name">Nome:</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div class="form-group">
+        <label for="rating">Come valuteresti la tua esperienza?</label>
+        <select id="rating" name="rating" required>
+          <option value="" disabled selected>Scegli un'opzione</option>
+          <option value="eccellente">Eccellente</option>
+          <option value="buona">Buona</option>
+          <option value="sufficiente">Sufficiente</option>
+          <option value="scarso">Scarso</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="comments">Commenti (opzionale):</label>
+        <textarea id="comments" name="comments" rows="4"></textarea>
+      </div>
+      <button type="submit">Invia</button>
+    </form>
+  </div>
+</body>
+</html>
