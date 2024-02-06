@@ -15,8 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         <td>${utente.cognome}</td>
                         <td>${utente.email}</td>
                         <td>
-                            <button onclick="modificaUtente(${utente.id})">Modifica</button>
                             <button onclick="rimuoviUtente(${utente.id})">Rimuovi</button>
+                            <button class="pulsante-modifica" onclick="modificaUtente(${utente.id})">Modifica</button>
                         </td>
                     `;
                     listaUtentiBody.appendChild(riga);
@@ -70,6 +70,10 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Funzione per modificare un utente
+// Funzione per modificare un utente
+
+
+// Funzione per modificare un utente
 window.modificaUtente = function(idUtente) {
     // Trova la riga corrispondente all'idUtente
     const riga = document.getElementById(`riga-${idUtente}`);
@@ -83,9 +87,12 @@ window.modificaUtente = function(idUtente) {
         campo.innerHTML = `<input type="text" value="${valoreAttuale}">`;
     });
 
-    // Sostituisci il pulsante "Modifica" con il pulsante "Salva"
+    // Sostituisci il pulsante "Modifica" con i pulsanti "Conferma" e "Annulla"
     const pulsanteModifica = riga.querySelector('.pulsante-modifica');
-    pulsanteModifica.innerHTML = `<button onclick="salvaModifiche(${idUtente})">Salva</button>`;
+    pulsanteModifica.innerHTML = `
+        <button onclick="confermaModifiche(${idUtente})">Conferma</button>
+        <button onclick="annullaModifiche(${idUtente})">Annulla</button>
+    `;
 };
 
     // Funzione per salvare le modifiche di un utente
@@ -122,6 +129,48 @@ window.modificaUtente = function(idUtente) {
         .catch(error => console.error('Errore durante il salvataggio delle modifiche dell\'utente:', error));
     };
 
+// Funzione per modificare un utente
+
+
+    // Funzione per confermare le modifiche di un utente
+    window.confermaModifiche = function(idUtente) {
+        // Trova la riga corrispondente all'idUtente
+        const riga = document.getElementById(`riga-${idUtente}`);
+        
+        // Trova i campi di input all'interno della riga
+        const campiInput = riga.querySelectorAll('input');
+
+        // Crea un oggetto per contenere i nuovi valori
+        const nuoviValori = {
+            nome: campiInput[0].value,
+            cognome: campiInput[1].value,
+            email: campiInput[2].value
+        };
+
+        // Invia una richiesta PUT al server per aggiornare l'utente
+        fetch(`http://localhost:3000/ListaUtenti/${idUtente}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(nuoviValori),
+        })
+        .then(response => {
+            if (response.ok) {
+                // Aggiorna la lista degli utenti dopo il salvataggio
+                caricaListaUtenti();
+            } else {
+                console.error('Errore durante il salvataggio delle modifiche dell\'utente');
+            }
+        })
+        .catch(error => console.error('Errore durante il salvataggio delle modifiche dell\'utente:', error));
+    };
+
+    // Funzione per annullare le modifiche di un utente
+    window.annullaModifiche = function(idUtente) {
+        // Ricarica la lista degli utenti per annullare le modifiche
+        caricaListaUtenti();
+    };
 
 
     // Carica la lista degli utenti al caricamento della pagina
